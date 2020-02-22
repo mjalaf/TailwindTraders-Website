@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Hosting;
 using Tailwind.Traders.Web.Standalone;
 
 namespace Tailwind.Traders.Web
@@ -24,7 +24,8 @@ namespace Tailwind.Traders.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddApplicationInsightsTelemetry();
+            services.AddRazorPages();
             services.AddOptions();
             services.Configure<Settings>(Configuration);
             // In production, the React files will be served from this directory
@@ -36,8 +37,10 @@ namespace Tailwind.Traders.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+      //  public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+    
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -48,20 +51,22 @@ namespace Tailwind.Traders.Web
             }
 
             app.UseStaticFiles();
+                    
             app.UseSpaStaticFiles(new StaticFileOptions()
             {
                 ServeUnknownFileTypes = true
             });
-
             app.UseStandalone(Configuration, Logger);
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-                });
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute("default", "{controller}/{action=Index}/{id?}").RequireAuthorization();
+            });
+             
             app.UseSpa(spa =>
             {
                 spa.Options.SourcePath = "ClientApp";
@@ -72,6 +77,7 @@ namespace Tailwind.Traders.Web
                     spa.UseReactDevelopmentServer(npmScript: "start");
                 }
             });
+            
         }
     }
 }

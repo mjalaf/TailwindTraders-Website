@@ -9,6 +9,6 @@ namespace Tailwind.Traders.Web.Standalone.Models
         public string Password { get; set; }
         
         [JsonProperty(PropertyName = "grant_type")]
-        public string GrantType { get; set; }
+        public string GrantType { get; set; }="password";
     }
 }

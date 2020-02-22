@@ -55,7 +55,7 @@ class LoginComponent extends Component {
             this.handleFormErrors();
             return;
         }
-
+      
         const loginFormData = await UserService.postLoginForm(formData);
 
         const LocalStorageInformation = this.generateLocalStorageInformation(loginFormData);
