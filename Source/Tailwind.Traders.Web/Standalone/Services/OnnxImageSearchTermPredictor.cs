@@ -1,14 +1,14 @@
-using System.IO;
-using System.Linq;
-using System.Numerics.Tensors;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.ML.OnnxRuntime;
+using Microsoft.ML.OnnxRuntime.Tensors;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Advanced;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.Primitives;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Tailwind.Traders.Web.Standalone.Services
 {

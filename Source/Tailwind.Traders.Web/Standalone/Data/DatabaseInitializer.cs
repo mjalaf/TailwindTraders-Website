@@ -1,5 +1,6 @@
 using System;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -127,8 +128,7 @@ namespace Tailwind.Traders.Web.Standalone.Data
                 var csv = await httpClient.GetStringAsync(csvUrl);
 
                 using (var stringReader = new StringReader(csv))
-                using (var csvReader = new CsvReader(stringReader))
-                {
+                using (var csvReader = new CsvReader(stringReader, CultureInfo.InvariantCulture)) { 
                     csvReader.Read();
                     csvReader.ReadHeader();
                     var headers = csvReader.Context.HeaderRecord;
