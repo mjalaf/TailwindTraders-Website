@@ -29,3 +29,9 @@ steps:
         command: restore
         projects: '**/*.csproj'
         modifyOutputPath: true
+    - task: DotNetCoreCLI@2
+      displayName: 'Build $(buildConfiguration)'
+      inputs:
+        command: build
+        projects: '**/*.csproj'
+        arguments: '--configuration $(buildConfiguration)'
