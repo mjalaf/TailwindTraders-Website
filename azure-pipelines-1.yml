@@ -35,11 +35,15 @@ steps:
         command: build
         projects: '**/*.csproj'
         arguments: '--configuration $(buildConfiguration)'
-    - task: AzureRmWebAppDeployment@4
+    - task: DotNetCoreCLI@2
+      displayName: "Publish"
       inputs:
-        ConnectionType: 'AzureRM'
-        azureSubscription: 'Consumo interno de Microsoft Azure (eceea43d-db87-4598-a940-d35888559d8a)'
-        appType: 'webAppLinux'
-        WebAppName: 'twtdemo2'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/TailwindTraders-Website/Source/Tailwind.Traders.Web'
-        RuntimeStack: 'DOTNETCORE|Latest'
+        command: 'publish'
+        publishWebProjects: true
+        arguments: '-r linux-x64 --configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+        zipAfterPublish: true
+    - task: PublishBuildArtifacts@1
+      displayName: "Upload Artifacts"
+      inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+        artifactName: 'twtdemo2' 
