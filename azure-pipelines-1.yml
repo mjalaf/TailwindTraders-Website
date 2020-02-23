@@ -16,31 +16,23 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+
     - task: UseDotNet@2 
-      displayName: ".NET Core 3.1.x"
+      displayName: ".NET Core 3.1.x Installation"
       inputs:
         version: '3.1.x'
         packageType: sdk
-    - script: dotnet build --configuration $(buildConfiguration)
-      displayName: 'dotnet build $(buildConfiguration)'
 
     - task: DotNetCoreCLI@2
-      displayName: "Test"
+      displayName: "Restore Packages"
       inputs:
-        command: test
-        projects: '**/*tests/*.csproj'
+        command: restore
+        projects: '**/*.csproj'
+        feedsToUse: config
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Build $(buildConfiguration)'
+      inputs:
+        command: build
+        projects: '**/*.csproj'
         arguments: '--configuration $(buildConfiguration)'
-
-    - task: DotNetCoreCLI@2
-      displayName: "Publish"
-      inputs:
-        command: 'publish'
-        publishWebProjects: true
-        arguments: '-r linux-x64 --configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
-        zipAfterPublish: true
-
-    - task: PublishBuildArtifacts@1
-      displayName: "Upload Artifacts"
-      inputs:
-        pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-        artifactName: 'compiledproject' 
