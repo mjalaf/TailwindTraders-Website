@@ -41,5 +41,5 @@ steps:
         azureSubscription: 'Consumo interno de Microsoft Azure (eceea43d-db87-4598-a940-d35888559d8a)'
         appType: 'webAppLinux'
         WebAppName: 'twtdemo2'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/TailwindTraders-Website/Source/Tailwind.Traders.Web'
         RuntimeStack: 'DOTNETCORE|Latest'
