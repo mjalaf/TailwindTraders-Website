@@ -17,8 +17,9 @@ namespace Tailwind.Traders.Web
                 .ConfigureAppConfiguration((hostingContext, config) =>{
                      var env = hostingContext.HostingEnvironment;
 
-                       config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true); // optional extra provider
+                       config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
+                            .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: false);
+                            // optional extra provider
                 })           
                 .UseStartup<Startup>();
     }
