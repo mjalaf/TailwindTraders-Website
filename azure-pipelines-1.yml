@@ -28,12 +28,4 @@ steps:
       inputs:
         command: restore
         projects: '**/*.csproj'
-        feedsToUse: config
         modifyOutputPath: true
-
-    - task: DotNetCoreCLI@2
-      displayName: 'Build $(buildConfiguration)'
-      inputs:
-        command: build
-        projects: '**/*.csproj'
-        arguments: '--configuration $(buildConfiguration)'
