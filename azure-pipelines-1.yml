@@ -42,6 +42,12 @@ steps:
         publishWebProjects: true
         arguments: '-r linux-x64 --configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
         zipAfterPublish: true
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: 'Source/Tailwind.Traders.Web/Standalone/OnnxModels'
+        Contents: '**'
+        TargetFolder: 'OnnxModels'
+        OverWrite: true
     - task: PublishBuildArtifacts@1
       displayName: "Upload Artifacts"
       inputs:
