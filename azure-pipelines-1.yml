@@ -46,7 +46,7 @@ steps:
       inputs:
         SourceFolder: 'Source/Tailwind.Traders.Web/Standalone/OnnxModels'
         Contents: '**'
-        TargetFolder: 'OnnxModels'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
         OverWrite: true
     - task: PublishBuildArtifacts@1
       displayName: "Upload Artifacts"
