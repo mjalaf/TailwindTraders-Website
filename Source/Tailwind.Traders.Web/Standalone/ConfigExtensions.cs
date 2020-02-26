@@ -14,6 +14,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Core.Events;
 using Tailwind.Traders.Web.Standalone.Data;
 using Tailwind.Traders.Web.Standalone.Services;
+using Microsoft.ApplicationInsights.Extensibility;
 
 namespace Tailwind.Traders.Web.Standalone
 {
@@ -29,7 +30,7 @@ namespace Tailwind.Traders.Web.Standalone
             services.AddScoped<SqlConnection>(
                 _ => new SqlConnection(config["SqlConnectionString"]));
 
-            var telemetryClient = new TelemetryClient();
+            var telemetryClient = new TelemetryClient(TelemetryConfiguration.CreateDefault());
             var mongoConnectionString = config["MongoConnectionString"] ?? "mongodb://localhost:27017";
             var mongoClientSettings = MongoClientSettings.FromConnectionString(mongoConnectionString);
             mongoClientSettings.ClusterConfigurator = cc =>

@@ -17,7 +17,7 @@ namespace Tailwind.Traders.Web.Standalone.Services
         private readonly ILogger<OnnxImageSearchTermPredictor> logger;
         private readonly InferenceSession session;
 
-        public OnnxImageSearchTermPredictor(IHostingEnvironment environment, ILogger<OnnxImageSearchTermPredictor> logger)
+        public OnnxImageSearchTermPredictor(IWebHostEnvironment environment, ILogger<OnnxImageSearchTermPredictor> logger)
         {
             this.logger = logger;
             var filePath = Path.Combine(environment.ContentRootPath, "Standalone/OnnxModels/products.onnx");
