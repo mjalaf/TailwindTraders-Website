@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { withNamespaces } from "react-i18next";
 
 import { ReactComponent as Logo } from "../../assets/images/logo-horizontal.svg";
+import { ConfigService } from "../../services";
 
 const Footer = ({ t }) => {
     return (
@@ -15,6 +16,7 @@ const Footer = ({ t }) => {
                 <div className="foo__disclaimer">
                     <p className="foo-text">{t("shared.footer.disclaimer")}</p>
                 </div>
+                <div className="foo-text">Version {t(ConfigService._version)}  </div>
             </div>
         </footer>
     );

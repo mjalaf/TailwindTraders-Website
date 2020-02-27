@@ -11,6 +11,9 @@ namespace Tailwind.Traders.Web
         public string Auth  {get; set;}
         public string ApiUrl {get; set;}
         public string ApiUrlShoppingCart {get; set;}
+
+        public string Version {get; set;}
+
         public bool UseB2C { get; set; }
         [JsonIgnore]
         public string SqlConnectionString { get; set; }
@@ -42,6 +45,7 @@ namespace Tailwind.Traders.Web
             {
                 ApiUrl = ApiUrl,
                 Auth = Auth,
+                Version = Version,
                 ApiUrlShoppingCart = ApiUrlShoppingCart,
                 ByPassShoppingCartApi = ByPassShoppingCartApi,
                 UseB2C = UseB2C

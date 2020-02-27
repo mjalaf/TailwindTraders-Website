@@ -28,6 +28,7 @@ const ConfigService = {
     _B2cClientId: B2cClientId,
     _B2cScopes: B2cScopes,
     _applicationInsightsIntrumentationKey: '',
+    _version:'',
     _debugInformation: {},
 
     async loadSettings() {
@@ -42,6 +43,7 @@ const ConfigService = {
             this._B2cScopes = settingsResponse.data.b2CAuth.scopes;
             this._devspacesName = settingsResponse.data.devspacesName;
             this._applicationInsightsIntrumentationKey = settingsResponse.data.applicationInsights.instrumentationKey;
+            this._version = settingsResponse.data.version;
             this._debugInformation = settingsResponse.data.debugInformation;
         }
     },
